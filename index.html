@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador hacia el 6 de Diciembre</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            background: linear-gradient(-45deg, #F72585, #7209B7, #3A0CA3, #4361EE, #4CC9F0);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        #subtitulo {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            font-weight: lighter;
+        }
+
+        #contador {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #detalle {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .icono {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Andy Feliz Precumpleaños!</h1>
+    <img src="Imagenes/torta-de-cumpleanos.png" alt="Pastel de cumpleaños" class="icono">
+    <div id="subtitulo">Cuenta regresiva para el gran día</div>
+    <div id="contador">-- días</div>
+    <div id="detalle">-- horas, -- minutos, -- segundos</div>
+    <img src="Imagenes/globos.png" alt="Globos de fiesta" class="icono">
+    
+
+    <script>
+        function actualizarContador() {
+            const hoy = new Date();
+            const fechaObjetivo = new Date(hoy.getFullYear(), 11, 6, 0, 0, 0); // 6 de diciembre a las 00:00
+            const diferenciaTiempo = fechaObjetivo - hoy;
+
+            if (diferenciaTiempo >= 0) {
+                const dias = Math.floor(diferenciaTiempo / (1000 * 60 * 60 * 24));
+                const horas = Math.floor((diferenciaTiempo % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutos = Math.floor((diferenciaTiempo % (1000 * 60 * 60)) / (1000 * 60));
+                const segundos = Math.floor((diferenciaTiempo % (1000 * 60)) / 1000);
+
+                document.getElementById('contador').textContent = `${dias} días`;
+                document.getElementById('detalle').textContent = `${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+            } else {
+                document.getElementById('contador').textContent = "¡Llegó el día!";
+                document.getElementById('detalle').textContent = "";
+            }
+        }
+
+        // Actualizar el contador inmediatamente y luego cada 1 segundo
+        actualizarContador();
+        setInterval(actualizarContador, 1000);
+    </script>
+</body>
+</html>
